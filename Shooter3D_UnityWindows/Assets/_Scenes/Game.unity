@@ -639,7 +639,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh157400
+  m_Name: pb_Mesh158048
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2905,7 +2905,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579456581}
-  m_LocalRotation: {x: 0.15700667, y: -0.000000008496492, z: 0.0000000013507584, w: 0.9875976}
+  m_LocalRotation: {x: 0.1570067, y: -0.00000001699298, z: 0.0000000027015166, w: 0.9875976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2983,7 +2983,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583037197}
-  m_LocalRotation: {x: 0.17987242, y: 0.000000008462872, z: -0.0000000015474769, w: 0.98368996}
+  m_LocalRotation: {x: 0.17987245, y: 0.000000008462872, z: -0.000000001547477, w: 0.98368996}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5459,7 +5459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959984571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.491, z: -3}
+  m_LocalPosition: {x: 0, y: 2.5, z: -6.8199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5546,8 +5546,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.17987242, y: 0.000000008462873, z: -0.0000000015474768, w: 0.98368996}
-  m_LocalPosition: {x: 0, y: 2.5, z: -3}
+  m_LocalRotation: {x: 0.17987245, y: 0.000000030513316, z: -0.000000005579507, w: 0.98368996}
+  m_LocalPosition: {x: 0, y: 2.5, z: -2.9999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8067,7 +8067,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409626320}
-  m_LocalRotation: {x: 0.20274006, y: -0.000000018837808, z: 0.000000003900175, w: 0.9792326}
+  m_LocalRotation: {x: 0.20274009, y: 0.000000018837808, z: -0.000000003900175, w: 0.9792326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97548,6 +97548,7 @@ MonoBehaviour:
   _gravityScale: -9.81
   _gravityMultiplier: 1
   _velocityY: 0
+  _isJumpPressed: 0
 --- !u!1 &2090468268 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c6687623ff0fd41428f1cb85df7a1bdd, type: 3}
@@ -97657,11 +97658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fcbbcb53f3bab945bd152b482273ed7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fcbbcb53f3bab945bd152b482273ed7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5fcbbcb53f3bab945bd152b482273ed7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97733,6 +97734,7 @@ MonoBehaviour:
   _animator: {fileID: 2070552780}
   _inputManager: {fileID: 382320236}
   _characterController: {fileID: 2070552782}
+  _playerLocomotion: {fileID: 2070552783}
   jump: 0
 --- !u!54 &2110361805
 Rigidbody:

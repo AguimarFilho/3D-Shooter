@@ -10,31 +10,20 @@ public class AnimationManager : MonoBehaviour
 
     [SerializeField] private CharacterController _characterController;
 
-    private PlayerLocomotion _playerLocomotion;
+    [SerializeField] private PlayerLocomotion _playerLocomotion;
 
     private float inputX;
     private float inputY;
 
     [HideInInspector] public bool jump;
 
-    private void Awake()
-    {
-        _playerLocomotion = FindObjectOfType<PlayerLocomotion>();
-    }
-    
+
     private void Update()
     {
         UpdateInputValues();
         UpdateAnimations();
 
-        if(_characterController.isGrounded)
-        {
-            _animator.SetBool("Jumping", jump);
-        }
-        else
-        {
-            _animator.SetBool("Jumping", jump);
-        }
+        JumpAndFallAnimations();
     }
     
     private void UpdateInputValues()
@@ -47,5 +36,27 @@ public class AnimationManager : MonoBehaviour
     {
         _animator.SetFloat("InputX", inputX);
         _animator.SetFloat("InputY", inputY);
+    }
+
+    private void JumpAndFallAnimations()
+    {
+        if(_playerLocomotion._isJumpPressed && _characterController.isGrounded)
+        {
+            _animator.SetBool("Jumping", true);
+        }
+        
+        if(!_playerLocomotion._isJumpPressed)
+        {
+            if(!_characterController.isGrounded)
+            {
+                _animator.SetBool("Falling", true);
+            }
+        }
+
+        if (_characterController.isGrounded && !_playerLocomotion._isJumpPressed)
+        {
+            _animator.SetBool("Jumping", false);
+            _animator.SetBool("Falling", false);
+        }
     }
 }

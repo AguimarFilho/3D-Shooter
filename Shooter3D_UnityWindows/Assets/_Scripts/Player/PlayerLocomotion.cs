@@ -21,14 +21,15 @@ public class PlayerLocomotion : MonoBehaviour
 
     private AnimationManager _animationManager;
 
+    public bool _isJumpPressed;
+
     private void Awake()
     {
         _animationManager = FindObjectOfType<AnimationManager>();
-    }
-    
-    private void Start()
-    {
+
+
         _inputManager.GameControls.Player.Jump.performed += Jump;
+        _inputManager.GameControls.Player.Jump.canceled += Jump;
     }
 
     private void Update()
@@ -61,15 +62,16 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if(_characterController.isGrounded)
+        _isJumpPressed = ctx.ReadValueAsButton();
+        
+        if(_characterController.isGrounded && _isJumpPressed)
         {
-            _animationManager.jump = true;
-           
-            _velocityY += _jumpForce;
-        }
-        else
-        {
-            _animationManager.jump = false;
+            newDirection.y += _jumpForce;
+
+            if (!_characterController.isGrounded)
+            {
+                newDirection.y = _velocityY;
+            }
         }
     }
 }

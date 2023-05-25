@@ -639,7 +639,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh158048
+  m_Name: pb_Mesh157422
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8067,7 +8067,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409626320}
-  m_LocalRotation: {x: 0.20274009, y: 0.000000018837808, z: -0.000000003900175, w: 0.9792326}
+  m_LocalRotation: {x: 0.20274007, y: -0.00000001883781, z: 0.000000003900175, w: 0.9792326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97766,6 +97766,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &2110361807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2245943287006726870, guid: 5fcbbcb53f3bab945bd152b482273ed7, type: 3}
+  m_PrefabInstance: {fileID: 2110361802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2110361808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110361807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dace1d0bcf0e9c14895128aead025180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2130084615
 PrefabInstance:
   m_ObjectHideFlags: 0

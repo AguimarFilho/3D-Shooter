@@ -8067,7 +8067,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409626320}
-  m_LocalRotation: {x: 0.20274007, y: -0.00000001883781, z: 0.000000003900175, w: 0.9792326}
+  m_LocalRotation: {x: 0.20274009, y: 0.000000018837808, z: -0.000000003900175, w: 0.9792326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97783,6 +97783,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dace1d0bcf0e9c14895128aead025180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2110361810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070552779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604505fe4fe0fed4a963c3da08a95fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponLoader: {fileID: 2110361808}
+  _weapon: {fileID: 7759641488194672206, guid: be675ff9b228da543947a59c78c29b0c, type: 3}
+  _animator: {fileID: 2070552780}
+  _animatorPistol: {fileID: 22100000, guid: 64dd64561cf76ff49b6d60ef77e44a6a, type: 2}
 --- !u!1001 &2130084615
 PrefabInstance:
   m_ObjectHideFlags: 0

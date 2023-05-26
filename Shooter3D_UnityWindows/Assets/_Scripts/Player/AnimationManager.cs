@@ -23,7 +23,7 @@ public class AnimationManager : MonoBehaviour
         UpdateInputValues();
         UpdateAnimations();
 
-        JumpAndFallAnimations();
+        //JumpAndFallAnimations();
     }
     
     private void UpdateInputValues()

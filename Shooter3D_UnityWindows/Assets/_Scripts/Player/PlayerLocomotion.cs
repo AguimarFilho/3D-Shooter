@@ -18,13 +18,18 @@ public class PlayerLocomotion : MonoBehaviour
 
     [Header("Ground & Air Verification")]
     [Space(15)]
+// Verificação de solo e tags
+    [Header("Ground, Checks and Tags")]
+    [Space(15)]
+    [SerializeField] private float _minimumDistanceToFall = 1f; // Distância mínima para detectar queda
+    [SerializeField] private LayerMask _ignoreForGroundCheck; // LayerMask para ignorar na verificação de solo
+    [SerializeField] private GameObject _leftFoot; // Pé esquerdo
+    [SerializeField] private Vector3 _leftFootOffset; // Deslocamento do pé esquerdo
+    [SerializeField] private Vector3 _centerOffset; // Deslocamento do centro do personagem
+    [SerializeField] private GameObject _rightFoot; // Pé direito
+    [SerializeField] private Vector3 _rightFootOffset; // Deslocamento do pé direito
+    private bool _isGrounded = false;
 
-    [SerializeField] private float _groundDetectionRayStartPoint = 0.5f;
-    [SerializeField] private float _minimumDistanceToFall = 1f;
-    [SerializeField] private float _groundDirectionRayDistance = 0.2f;
-    [SerializeField] private LayerMask _ignorForGroundCheck;
-    private bool IsGrounded = false;
-    private bool IsInAir;
 
 
     private AnimationManager _animationManager;
@@ -44,13 +49,14 @@ public class PlayerLocomotion : MonoBehaviour
         _animationManager = FindObjectOfType<AnimationManager>();
 
 
-        //_inputManager.GameControls.Player.Jump.performed += Jump;
-        //_inputManager.GameControls.Player.Jump.canceled += Jump;
+        _inputManager.GameControls.Player.Jump.performed += OnJump;
+        _inputManager.GameControls.Player.Jump.canceled += OnJump;
     }
 
     private void Update()
     {
-        ApplyGravity(_newDirection);
+        HandleGravity();
+        Jump();
         Walk();
     }
     private void LateUpdate()
@@ -68,79 +74,53 @@ public class PlayerLocomotion : MonoBehaviour
         _characterController.Move(_newDirection * (_walkspeed * Time.deltaTime));
     }
 
-    private void ApplyGravity(Vector3 moveDirection)
+    private void HandleGravity()
     {
-        _newDirection.y = _velocityY;
+        // Verifica se algum dos pés ou o centro do personagem está no chão
+        bool isCenterGrounded = Physics.Raycast(transform.position + _centerOffset, -Vector3.up, out RaycastHit centerHit, _minimumDistanceToFall, _ignoreForGroundCheck);
+        bool isRightFootGrounded = Physics.Raycast(_rightFoot.transform.position + _rightFootOffset, -Vector3.up, out RaycastHit rightFootHit, _minimumDistanceToFall, _ignoreForGroundCheck);
+        bool isLeftFootGrounded = Physics.Raycast(_leftFoot.transform.position + _leftFootOffset, -Vector3.up, out RaycastHit leftFootHit, _minimumDistanceToFall, _ignoreForGroundCheck);
 
-        IsGrounded = false;
-        RaycastHit Hit;
-        Vector3 origin = transform.localPosition;
-        origin.y += _groundDetectionRayStartPoint;
 
-        if(Physics.Raycast(origin, transform.forward, out Hit, 0.4f))
+        bool isAnyFootGrounded = isCenterGrounded || isRightFootGrounded || isLeftFootGrounded;
+
+        if (isAnyFootGrounded)
         {
-            _velocityY = -1f;
+            // O personagem está no chão
+            _isGrounded = true;
+            _velocityY = -1f; // Reiniciar a velocidade vertical
         }
-        if(IsInAir)
+        else if(!isAnyFootGrounded)
         {
-            _velocityY = _gravityScale * _gravityMultiplier;
-        }
-
-        Vector3 dir = moveDirection;
-        dir.Normalize();
-        origin = origin + dir * _groundDirectionRayDistance;
-
-        Debug.DrawRay(origin, -Vector3.up * _minimumDistanceToFall, Color.red, 0.1f, false);
-
-        if(Physics.Raycast(origin, -Vector3.up, out Hit, _minimumDistanceToFall, _ignorForGroundCheck))
-        {
-            _normalVector = Hit.normal;
-            Vector3 tp = Hit.point;
-            IsGrounded = true;
-            _targetPosition.y = tp.y;
-
-            if(IsInAir)
-            {
-                if(_isInAirTime > 0.5f)
-                {
-                    Debug.Log("To na transição da queda pro  chão");
-                    _isInAirTime = 0;
-                }
-                else
-                {
-                    Debug.Log("To no chão");
-                    _isInAirTime = 0;
-                }
-
-                IsInAir = false;
-            }
-        }
-        else
-        {
-            if(IsGrounded)
-            {
-                IsGrounded = false;
-            }
-            if(IsInAir == false)
-            {
-                Debug.Log("Caindo porra");
-
-                IsInAir = true;
-            }
+            // O personagem está no ar
+            _isGrounded = false;
+            _velocityY += _gravityScale * _gravityMultiplier * Time.deltaTime; // Aplicar gravidade
         }
     }
 
-   private void Jump(InputAction.CallbackContext ctx)
+    private void OnDrawGizmos()
+    {
+    // Exibe os raios no Editor Unity para verificar a detecção de solo
+    Gizmos.color = Color.red;
+    Gizmos.DrawRay(transform.position + _centerOffset, -Vector3.up * _minimumDistanceToFall);
+    Gizmos.DrawRay(_rightFoot.transform.position + _rightFootOffset, -Vector3.up * _minimumDistanceToFall);
+    Gizmos.DrawRay(_leftFoot.transform.position + _leftFootOffset, -Vector3.up * _minimumDistanceToFall);
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx)
     {
         _isJumpPressed = ctx.ReadValueAsButton();
-        
-        if(IsGrounded && _isJumpPressed)
-        {
-            newDirection.y += _jumpForce;
+    }
 
-            if (!IsGrounded)
+    private void Jump()
+    {
+        if(_isGrounded && _isJumpPressed)
+        {
+            _velocityY += _jumpForce;
+
+            if (!_isGrounded)
             {
-                newDirection.y = _velocityY;
+                _velocityY = _velocityY;
             }
         }
     }

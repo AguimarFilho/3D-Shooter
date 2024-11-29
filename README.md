@@ -1,2 +1,2 @@
-# Shooter3D
-Projeto 3D Escolar.
+# 3D Shooter
+3D School Project.
